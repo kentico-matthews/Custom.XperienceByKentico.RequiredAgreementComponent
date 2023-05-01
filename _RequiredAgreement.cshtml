@@ -1,0 +1,14 @@
+﻿@using CMS.Helpers
+@using Kentico.Forms.Web.Mvc
+@using Kentico.Web.Mvc
+@using CustomFormComponent.RequiredAgreement
+@using Microsoft.AspNetCore.Html
+@model RequiredAgreementComponent
+@{
+    IDictionary<string, object> htmlAttributes = ViewData.Kentico().GetEditorHtmlAttributes();
+    var spanTitle = htmlAttributes.TryGetValue("title", out object title) ? title : String.Empty;
+}
+<span class="ktc-checkbox" title="@spanTitle">
+    @Html.CheckBoxFor(m => m.Value, htmlAttributes)
+    <label for="@Html.IdFor(x => x.Value)">@(String.IsNullOrWhiteSpace(Model.Properties.Text) ? Html.Raw("&nbsp;") : new HtmlString(ResHelper.LocalizeString(Model.Properties.Text)))</label>
+</span>
